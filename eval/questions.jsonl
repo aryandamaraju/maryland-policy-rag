@@ -1,0 +1,15 @@
+{"question": "What wage level makes quitting a job not count as a voluntary quit?", "gold_file": "ch130_work.pdf", "gold_phrase": "30 times the hourly federal minimum wage"}
+{"question": "Is a government employee who is fired for going on strike treated as having voluntarily quit?", "gold_file": "ch130_work.pdf", "gold_phrase": "considered to have voluntarily quit the job without good cause"}
+{"question": "Does a household need to provide its Social Security card to verify the SSN?", "gold_file": "ch408_verification.pdf", "gold_phrase": "SS card is not necessary"}
+{"question": "How long must someone have served on active duty for a discharge to meet the minimum service requirement for the veteran exemption?", "gold_file": "ch120_citizenship.pdf", "gold_phrase": "two or more years of continuous active duty"}
+{"question": "How many quarters of work let a lawful permanent resident be treated as having met the five year bar?", "gold_file": "ch120_citizenship.pdf", "gold_phrase": "40 qualifying quarters"}
+{"question": "What is the resource limit for a household that has an elderly or disabled member?", "gold_file": "ch200_resources.pdf", "gold_phrase": "permitted to have $3,250"}
+{"question": "What is the standard resource limit for a household with no elderly or disabled member?", "gold_file": "ch200_resources.pdf", "gold_phrase": "limit is $2,250"}
+{"question": "Do resources matter when deciding eligibility for a categorically eligible household?", "gold_file": "ch200_resources.pdf", "gold_phrase": "resources are not considered when determining eligibility"}
+{"question": "Do households that are categorically eligible have to pass the income tests?", "gold_file": "ch115_categorical.pdf", "gold_phrase": "not subject to the gross and net income test"}
+{"question": "When does the five-year waiting period for qualified immigrants start counting?", "gold_file": "ch120_citizenship.pdf", "gold_phrase": "begins on the date the immigrant obtains status"}
+{"question": "Are energy assistance payments from LIHEAP counted as a resource?", "gold_file": "ch200_resources.pdf", "gold_phrase": "LIHEAP funds the Maryland Energy Assistance Program"}
+{"question": "What kinds of sources can a household use to back up a claim that it had good cause for quitting a job?", "gold_file": "ch130_work.pdf", "gold_phrase": "union representatives, and grievance committees"}
+{"question": "What is the SNAP benefit amount for a family of four in California?", "gold_file": null}
+{"question": "How do I apply for Medicaid in Maryland?", "gold_file": null}
+{"question": "What is the WIC income limit for a pregnant woman?", "gold_file": null}
