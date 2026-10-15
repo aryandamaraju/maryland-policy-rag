@@ -116,7 +116,12 @@ def _gen_openai_compat(system, user):
                 "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
             }
         ).encode(),
-        headers={"Content-Type": "application/json", "Authorization": "Bearer " + os.environ["LLM_API_KEY"]},
+        headers={
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "User-Agent": "snap-rag/1.0 (+https://github.com/aryandamaraju/maryland-policy-rag)",
+            "Authorization": "Bearer " + os.environ["LLM_API_KEY"],
+        },
     )
     with urllib.request.urlopen(req, timeout=60) as r:
         return _json.loads(r.read())["choices"][0]["message"]["content"]

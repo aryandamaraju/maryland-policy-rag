@@ -28,8 +28,10 @@ def ask(q: Question):
     except Exception as e:  # generation can fail; still show retrieved sources
         hits = rag.retrieve(question, 5)
         text = None
-        print("generation error:", e)
+        err = f"{type(e).__name__}: {str(e)[:160]}"
+        print("generation error:", err)
     return {
+        "error": locals().get("err"),
         "answer": text,
         "refused": bool(text) and rag.REFUSAL.lower() in text.lower(),
         "sources": [
