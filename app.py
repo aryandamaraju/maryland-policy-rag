@@ -4,9 +4,19 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
+import re
+
 import rag
 
 app = FastAPI(title="Regulatory Document Q&A")
+
+
+def _clean(text):
+    """Normalize model output: plain text, [n] citations."""
+    if not text:
+        return text
+    text = re.sub(r"[【\[](\d+)[】\]]", r"[\1]", text)
+    return text.replace("**", "").strip()
 
 
 class Question(BaseModel):
@@ -32,7 +42,7 @@ def ask(q: Question):
         print("generation error:", err)
     return {
         "error": locals().get("err"),
-        "answer": text,
+        "answer": _clean(text),
         "refused": bool(text) and rag.REFUSAL.lower() in text.lower(),
         "sources": [
             {"n": i + 1, "file": h["file"], "page": h["page"], "score": round(h["score"], 3), "snippet": h["text"][:400]}
