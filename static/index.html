@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Regulatory Document Q&A</title>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--mut:#666;--card:#f4f5f7;--acc:#2457d6;--bd:#d9dce1}
+@media(prefers-color-scheme:dark){:root{--bg:#14161a;--fg:#e8e8e8;--mut:#9aa0a6;--card:#1d2026;--acc:#7aa2ff;--bd:#2d3139}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.4rem;margin:0 0 4px}.sub{color:var(--mut);margin:0 0 20px}
+form{display:flex;gap:8px}input{flex:1;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit}
+button{padding:10px 16px;border:0;border-radius:8px;background:var(--acc);color:#fff;font:inherit;cursor:pointer}button:disabled{opacity:.5}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}.chips button{background:var(--card);color:var(--fg);border:1px solid var(--bd);font-size:.85rem;padding:6px 10px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-top:14px;white-space:pre-wrap}
+.src{font-size:.88rem}.src b{color:var(--acc)}.meta{color:var(--mut);font-size:.8rem}
+</style></head><body><main>
+<h1>Regulatory Document Q&amp;A</h1>
+<p class="sub">Ask a question about the Maryland SNAP policy manual. Answers cite their sources, and the system says so when it cannot find an answer in the documents.</p>
+<form id="f"><input id="q" placeholder="e.g. What is the telephone standard deduction?" maxlength="500" required><button id="b">Ask</button></form>
+<div class="chips" id="chips"></div>
+<div id="out"></div>
+<p class="meta">Demo using a small open model on a free CPU server, so answers can take 20 to 60 seconds. Not official guidance.</p>
+<script>
+const ex=["What is the telephone standard deduction?","Does a household need cooking facilities to qualify?","Are EITC payments counted as income?","What is the SNAP income limit in Texas?"];
+const q=document.getElementById("q"),b=document.getElementById("b"),out=document.getElementById("out");
+ex.forEach(t=>{const c=document.createElement("button");c.type="button";c.textContent=t;c.onclick=()=>{q.value=t;ask()};document.getElementById("chips").appendChild(c)});
+document.getElementById("f").onsubmit=e=>{e.preventDefault();ask()};
+function card(text,cls){const d=document.createElement("div");d.className=cls||"card";d.textContent=text;return d}
+async function ask(){
+  out.textContent="";b.disabled=true;out.appendChild(card("Searching the documents..."));
+  try{
+    const r=await fetch("/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:q.value})});
+    if(!r.ok)throw new Error("Request failed ("+r.status+")");
+    const d=await r.json();out.textContent="";
+    out.appendChild(card(d.answer||"The answer generator is unavailable right now. The most relevant passages are below."));
+    d.sources.forEach(s=>{const c=document.createElement("div");c.className="card src";
+      const h=document.createElement("div");const n=document.createElement("b");n.textContent="["+s.n+"] ";
+      h.appendChild(n);h.appendChild(document.createTextNode(s.file+", page "+s.page));
+      const m=document.createElement("span");m.className="meta";m.textContent="  score "+s.score;h.appendChild(m);
+      const p=document.createElement("div");p.textContent=s.snippet+"...";c.appendChild(h);c.appendChild(p);out.appendChild(c)});
+  }catch(err){out.textContent="";out.appendChild(card("Error: "+err.message))}
+  b.disabled=false;
+}
+</script></main></body></html>

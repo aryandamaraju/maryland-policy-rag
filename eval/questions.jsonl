@@ -13,3 +13,36 @@
 {"question": "What is the SNAP benefit amount for a family of four in California?", "gold_file": null}
 {"question": "How do I apply for Medicaid in Maryland?", "gold_file": null}
 {"question": "What is the WIC income limit for a pregnant woman?", "gold_file": null}
+{"question": "What is the maximum gross monthly income for a household of four?", "gold_file": "ch600_standards.pdf", "gold_phrase": "$3,483"}
+{"question": "What is the maximum SNAP allotment for a household of three?", "gold_file": "ch600_standards.pdf", "gold_phrase": "$785"}
+{"question": "What is the standard deduction for a household of four people?", "gold_file": "ch600_standards.pdf", "gold_phrase": "Household of 4— $223"}
+{"question": "What is the minimum allotment for one- and two-person households?", "gold_file": "ch600_standards.pdf", "gold_phrase": "$24"}
+{"question": "What is the Standard Utility Allowance amount?", "gold_file": "ch600_standards.pdf", "gold_phrase": "$572"}
+{"question": "What is the telephone standard deduction?", "gold_file": "ch600_standards.pdf", "gold_phrase": "Telephone Standard $40"}
+{"question": "How is the SNAP allotment calculated from net income?", "gold_file": "ch600_standards.pdf", "gold_phrase": "Multiply the household’s net monthly income by 30%"}
+{"question": "Can children 21 or younger living with their parents form a separate household?", "gold_file": "ch100_household.pdf", "gold_phrase": "cannot be separate households from their parents"}
+{"question": "If a boarder gets two meals or less a day, what must the payment equal?", "gold_file": "ch100_household.pdf", "gold_phrase": "two-thirds of the maximum monthly SNAP allotment"}
+{"question": "Is it required that household members share non-household expenses?", "gold_file": "ch100_household.pdf", "gold_phrase": "It is not necessary that the group of people share other non-household expenses"}
+{"question": "Does a household need cooking facilities to qualify?", "gold_file": "ch100_household.pdf", "gold_phrase": "no requirement that the household has cooking facilities"}
+{"question": "When can a person who leaves a household apply separately?", "gold_file": "ch100_household.pdf", "gold_phrase": "the month after the move"}
+{"question": "How much unearned income is considered infrequent and irregular?", "gold_file": "ch211_excluded_income.pdf", "gold_phrase": "$200 every 6 months"}
+{"question": "How much earned income in a quarter counts as infrequent and irregular?", "gold_file": "ch211_excluded_income.pdf", "gold_phrase": "does not exceed $30 in a calendar quarter"}
+{"question": "Are Earned Income Tax Credit payments counted as income?", "gold_file": "ch211_excluded_income.pdf", "gold_phrase": "Earned Income Tax Credits (EITC) payments"}
+{"question": "Is a loan counted as income?", "gold_file": "ch211_excluded_income.pdf", "gold_phrase": "Do not confuse loans with advances in income"}
+{"question": "Is an income advance counted as income?", "gold_file": "ch211_excluded_income.pdf", "gold_phrase": "count an income advance as income when it is received"}
+{"question": "What is the SNAP income limit in Texas?", "gold_file": null, "gold_phrase": null}
+{"question": "How do I apply for unemployment insurance in Maryland?", "gold_file": null, "gold_phrase": null}
+{"question": "What is the maximum Social Security retirement benefit?", "gold_file": null, "gold_phrase": null}
+{"question": "Are SNAP benefits taxable on a federal return?", "gold_file": null, "gold_phrase": null}
+{"question": "What is the minimum wage in Maryland?", "gold_file": null, "gold_phrase": null}
+{"question": "If two people were never legally married but present themselves as a couple, how are they treated for household purposes?", "gold_file": "ch100_household.pdf", "gold_phrase": "hold themselves out to the community"}
+{"question": "Is a person staying in a domestic violence shelter allowed to be counted in two households?", "gold_file": "ch100_household.pdf", "gold_phrase": "resident of a shelter for battered women and children"}
+{"question": "Can an older household with a disabled member deduct all of its housing costs, or is there a ceiling?", "gold_file": "ch600_standards.pdf", "gold_phrase": "uncapped shelter deduction"}
+{"question": "What is the cap on the housing cost deduction for ordinary households?", "gold_file": "ch600_standards.pdf", "gold_phrase": "$744"}
+{"question": "How much allowance does a household with no home get for shelter costs?", "gold_file": "ch600_standards.pdf", "gold_phrase": "$198.99"}
+{"question": "What is the income ceiling for a two-person household that has an elderly or disabled member and buys food separately?", "gold_file": "ch600_standards.pdf", "gold_phrase": "$2,909"}
+{"question": "When money is sent to pay for someone who does not live in the home, how much of it is ignored?", "gold_file": "ch211_excluded_income.pdf", "gold_phrase": "exclude only that portion of the payment intended for the non-household member"}
+{"question": "Do gifts from private aid organizations count toward a household's income?", "gold_file": "ch211_excluded_income.pdf", "gold_phrase": "Charitable Contributions based on need from one or more private organizations"}
+{"question": "Is money a student receives for college tuition counted as income?", "gold_file": "ch211_excluded_income.pdf", "gold_phrase": "Educational assistance awarded to a household member enrolled at a recognized institution"}
+{"question": "In a household's first month, what happens if the computed amount comes out very low?", "gold_file": "ch600_standards.pdf", "gold_phrase": "In an initial month, if the allotment is less than $10"}
+{"question": "Does the way a boarder is charged for meals change how the boarder household is treated?", "gold_file": "ch100_household.pdf", "gold_phrase": "two meals or less a day"}

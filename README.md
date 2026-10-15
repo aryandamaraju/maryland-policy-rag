@@ -32,21 +32,27 @@ Download the PDF versions of chapters 100, 115, 120, 130, 200, 211, 408 and 600 
 
 ## Evaluation
 
-15 hand-written questions: 12 answerable (each labeled with a source file and a phrase that must appear in a retrieved passage) and 3 unanswerable.
+48 hand-written questions covering all eight chapters: 40 answerable (each labeled with a source file and a phrase that must appear in a retrieved passage) and 8 unanswerable. Run with `python eval.py dense|hybrid|rerank`.
 
-| Variant | Retrieval hit rate@5 | Correct refusals |
+| Retrieval mode | Retrieval hit rate@5 | Correct refusals |
 |---|---|---|
-| Baseline: 1000-char chunks, bge-small, cosine top-5, qwen2.5:7b | 11/12 (92%) | 3/3 |
+| Dense: bge-small cosine top-5 | 34/40 (85%) | 8/8 |
+| Hybrid: dense + BM25, reciprocal rank fusion | 38/40 (95%) | 8/8 |
+| Rerank: hybrid top-20, rescored by ms-marco-MiniLM-L-6-v2 cross-encoder | 40/40 (100%) | 8/8 |
+
+All runs: 1000-char chunks with 200 overlap, qwen2.5:7b via Ollama for the refusal checks.
 
 Caveats:
-- Small set. Questions were written while reading the passages, so their wording overlaps the source. Expect lower scores on harder questions.
+- Small set. Most questions were written while reading the passages, so their wording overlaps the source. Expect lower scores on harder questions.
 - Hit rate checks retrieval only, not whether the final answer is correct.
-- Questions cover chapters 115, 120, 130, 200 and 408. Chapters 100, 211 and 600 have none yet.
+- Refusals are judged by exact match on the refusal sentence.
 
 ## What failed and why
 
-One miss: "Do resources matter when deciding eligibility for a categorically eligible household?" The passage that states the rule (ch200 p.1) was not in the top 5. The top 5 were ch200 p.8, ch115 p.6 (twice), ch408 p.12 and ch200 p.4, with similarity scores bunched between 0.80 and 0.83. Many passages discuss categorical eligibility, and the embedding does not separate the one that states the rule. The model still answered "No", which is correct, but its stated reason ("not verified") is not what the rule says.
+Dense retrieval missed 6 questions. One example: "Do resources matter when deciding eligibility for a categorically eligible household?" The passage that states the rule (ch200 p.1) was not in the top 5. Similarity scores were bunched between 0.80 and 0.83 across many passages about categorical eligibility, and the embedding did not separate the one that states the rule. Dense also missed exact-figure lookups such as the maximum allotment for a household of three.
+
+Hybrid fixes most of these, because BM25 matches exact terms and numbers. It still misses two paraphrased questions where the question shares few words with the source ("deduct all of its housing costs" vs. "uncapped shelter deduction"; "buys food separately" for the separate-purchase income limit). Reranking the top 20 hybrid candidates with a cross-encoder recovers both.
 
 ## Next
 
-Hybrid (BM25 plus embeddings) search, reranking, LLM-graded answer correctness and hallucination rate, a harder question set, a FastAPI service, Docker, a CI eval gate, and deployment.
+LLM-graded answer correctness and hallucination rate, and a harder question set written without looking at the source passages.

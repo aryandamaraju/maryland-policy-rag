@@ -1,5 +1,8 @@
 .venv/
 .env
-index/
 data/docs/
 __pycache__/
+out_*.txt
+STATUS.md
+requirements.new.txt
+eval/questions_draft.jsonl
