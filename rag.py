@@ -101,6 +101,18 @@ def _gen_transformers(system, user):
     return out[0]["generated_text"][-1]["content"]
 
 
+def _payload(system, user):
+    body = {
+        "model": MODEL,
+        "temperature": 0,
+        "max_tokens": 1500,
+        "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+    }
+    if "gpt-oss" in MODEL:  # reasoning models: keep thinking short so the answer fits
+        body["reasoning_effort"] = "low"
+    return body
+
+
 def _gen_openai_compat(system, user):
     """Any OpenAI-compatible chat API (Groq, etc.). Key comes from the LLM_API_KEY env var."""
     import json as _json
@@ -108,14 +120,7 @@ def _gen_openai_compat(system, user):
 
     req = urllib.request.Request(
         os.getenv("LLM_BASE_URL", "https://api.groq.com/openai/v1") + "/chat/completions",
-        data=_json.dumps(
-            {
-                "model": MODEL,
-                "temperature": 0,
-                "max_tokens": 400,
-                "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
-            }
-        ).encode(),
+        data=_json.dumps(_payload(system, user)).encode(),
         headers={
             "Content-Type": "application/json",
             "Accept": "application/json",

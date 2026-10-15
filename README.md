@@ -35,7 +35,7 @@ Create a `.env` file:
     LLM_PROVIDER=ollama
     LLM_MODEL=qwen2.5:7b
 
-To use an OpenAI-compatible API such as Groq instead, set `LLM_PROVIDER=openai_compat`, `LLM_MODEL` (for example `llama-3.1-8b-instant`) and `LLM_API_KEY`. `LLM_BASE_URL` defaults to Groq's endpoint.
+To use an OpenAI-compatible API such as Groq instead, set `LLM_PROVIDER=openai_compat`, `LLM_MODEL` (for example `openai/gpt-oss-20b`) and `LLM_API_KEY`. `LLM_BASE_URL` defaults to Groq's endpoint.
 
 Download the PDF versions of chapters 100, 115, 120, 130, 200, 211, 408 and 600 from the manual page into `data/docs` as `ch100_household.pdf`, `ch115_categorical.pdf`, `ch120_citizenship.pdf`, `ch130_work.pdf`, `ch200_resources.pdf`, `ch211_excluded_income.pdf`, `ch408_verification.pdf`, `ch600_standards.pdf`. Then:
 
