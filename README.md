@@ -1,3 +1,12 @@
+---
+title: Regulatory Document QA
+emoji: 📄
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 7860
+---
+
 # Maryland SNAP Policy RAG
 
 A question-answering system over eight public chapters of the Maryland SNAP manual. It retrieves relevant passages, answers using only those passages with citations, and refuses when the documents don't contain the answer. It includes a small evaluation harness.
