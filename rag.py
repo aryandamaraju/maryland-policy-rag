@@ -2,6 +2,12 @@ import json
 import os
 from pathlib import Path
 
+# Serverless hosts (Vercel) only allow writes under /tmp, so keep every model cache there.
+if os.getenv("VERCEL"):
+    os.environ.setdefault("HF_HOME", "/tmp/hf")
+    os.environ.setdefault("HF_HUB_DISABLE_XET", "1")
+    os.environ.setdefault("FASTEMBED_CACHE_PATH", "/tmp/fastembed")
+
 import numpy as np
 from dotenv import load_dotenv
 from fastembed import TextEmbedding
