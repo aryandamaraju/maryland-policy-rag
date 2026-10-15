@@ -21,23 +21,28 @@ Not benefits or legal advice. Source: [Maryland DHS SNAP manual](https://dhs.mar
 
 ## Setup
 
-Requires Python 3.12 and Ollama.
+Requires Python 3.12. Ollama is needed only for the local LLM.
 
     python -m venv .venv
     .venv\Scripts\Activate.ps1
-    pip install -r requirements.txt
+    pip install -r requirements-dev.txt
     ollama pull qwen2.5:7b
+
+`requirements.txt` lists only what the web app needs at runtime (it is what Vercel installs). `requirements-dev.txt` adds ingestion (pypdf) and the Ollama and Anthropic clients.
 
 Create a `.env` file:
 
     LLM_PROVIDER=ollama
     LLM_MODEL=qwen2.5:7b
 
+To use an OpenAI-compatible API such as Groq instead, set `LLM_PROVIDER=openai_compat`, `LLM_MODEL` (for example `llama-3.1-8b-instant`) and `LLM_API_KEY`. `LLM_BASE_URL` defaults to Groq's endpoint.
+
 Download the PDF versions of chapters 100, 115, 120, 130, 200, 211, 408 and 600 from the manual page into `data/docs` as `ch100_household.pdf`, `ch115_categorical.pdf`, `ch120_citizenship.pdf`, `ch130_work.pdf`, `ch200_resources.pdf`, `ch211_excluded_income.pdf`, `ch408_verification.pdf`, `ch600_standards.pdf`. Then:
 
     python ingest.py
     python ask.py "your question"
     python eval.py
+    uvicorn app:app --port 8000
 
 ## Evaluation
 

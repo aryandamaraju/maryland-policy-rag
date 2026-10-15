@@ -1,0 +1,5 @@
+-r requirements.txt
+ollama==0.6.3
+pypdf
+anthropic
+onnxruntime==1.31.0

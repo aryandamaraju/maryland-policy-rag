@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
@@ -39,4 +41,4 @@ def ask(q: Question):
 
 @app.get("/")
 def index():
-    return FileResponse("static/index.html")
+    return FileResponse(Path(__file__).resolve().parent / "static" / "index.html")

@@ -7,7 +7,10 @@ from dotenv import load_dotenv
 from fastembed import TextEmbedding
 
 load_dotenv()
-INDEX = Path("index")
+_HERE = Path(__file__).resolve().parent
+INDEX = _HERE / "index"
+if "FASTEMBED_CACHE_PATH" not in os.environ and (_HERE / "models").exists():
+    os.environ["FASTEMBED_CACHE_PATH"] = str(_HERE / "models")  # bundled model weights
 PROVIDER = os.getenv("LLM_PROVIDER", "ollama")
 MODEL = os.getenv("LLM_MODEL", "qwen2.5:7b")
 REFUSAL = "I can't find that in the provided documents."
@@ -92,7 +95,30 @@ def _gen_transformers(system, user):
     return out[0]["generated_text"][-1]["content"]
 
 
+def _gen_openai_compat(system, user):
+    """Any OpenAI-compatible chat API (Groq, etc.). Key comes from the LLM_API_KEY env var."""
+    import json as _json
+    import urllib.request
+
+    req = urllib.request.Request(
+        os.getenv("LLM_BASE_URL", "https://api.groq.com/openai/v1") + "/chat/completions",
+        data=_json.dumps(
+            {
+                "model": MODEL,
+                "temperature": 0,
+                "max_tokens": 400,
+                "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+            }
+        ).encode(),
+        headers={"Content-Type": "application/json", "Authorization": "Bearer " + os.environ["LLM_API_KEY"]},
+    )
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return _json.loads(r.read())["choices"][0]["message"]["content"]
+
+
 def generate(system, user):
+    if PROVIDER == "openai_compat":
+        return _gen_openai_compat(system, user)
     if PROVIDER == "transformers":
         return _gen_transformers(system, user)
     if PROVIDER == "anthropic":
